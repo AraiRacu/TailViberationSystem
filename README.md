@@ -31,12 +31,16 @@ ArduinoIDEのライブラリマネージャーから"ArduinoOSC"を検索し，�
 PythonでOSC通信ができるように"python-osc"を導入します．<br>
 コマンドプロンプトを開き，以下のコマンドを入力します．<br>
 <br>
-`pip install python-osc`
+```
+pip install python-osc
+```
 <br><br>
 インストールが成功後，以下のコマンドを入力し，インストール済みのライブラリを表示します．<br>
 その中に"python-osc"が含まれていれば成功です．<br>
 <br>
-`python -m pip freeze`
+```
+python -m pip freeze
+```
 
 参考：https://pypi.org/project/python-osc/
 
@@ -45,19 +49,80 @@ PythonでOSC通信ができるように"python-osc"を導入します．<br>
 1. Unityでの設定<br>
 画像のように尻尾に追加したPhysBoneの"Option"に任意のパラメータを入力してください．<br>
 `[ここで設定したパラメータ名]_IsGrabbed`が今回用いるパラメータになります．<br>
+入力後，アバターをアップロードしてください．<br>
 ※デフォルトは"Tail"です．任意のパラメータ名にするとPythonのコードを書き換える必要があります．<br>
 <br>
 <img src="image/vrc1.png" width="400">
 
-1. jsonファイルの追記
-
+2. jsonファイルの追記<br>
+PhysBoneで設定したパラメータがOSCとして送信されるように設定します．<br>
+VRChatの一時フォルダを開きます．(一時フォルダを変更している場合は変更先を参照してください)<br>
+`C:\Users\(ユーザ名)\AppData\LocalLow\VRChat\VRChat\OSC\(ユーザID)\Avatars\`<br>
+この中から，適用したいアバターのjsonファイルを探し，テキストエディタで開きます．<br>
+`(アバター名)_(アバターID).json`<br>
+ファイルを開いたら，以下のコードを追記します．(`<!--ここから-->, <!--ここまで-->`は含めないでください)<br>
+PhysBoneで設定したパラメータが"Tail"ではない場合，コード内の"Tail"を設定したパラメータ名に書き換えてください．<br>
+追記後，保存して閉じてください．<br>
+```json
+{
+  "id": "[アバターID]",
+  "name": "[アバター名]",
+  "parameters": [
+    <!--ここから-->
+    {
+      "name": "Tail_Stretch",
+      "input": {
+        "address": "/avatar/parameters/Tail_Stretch",
+        "type": "Float"
+      },
+      "output": {
+        "address": "/avatar/parameters/Tail_Stretch",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "Tail_Angle",
+      "input": {
+        "address": "/avatar/parameters/Tail_Angle",
+        "type": "Float"
+      },
+      "output": {
+        "address": "/avatar/parameters/Tail_Angle",
+        "type": "Float"
+      }
+    },
+    {
+      "name": "Tail_IsGrabbed",
+      "input": {
+        "address": "/avatar/parameters/Tail_IsGrabbed",
+        "type": "Bool"
+      },
+      "output": {
+        "address": "/avatar/parameters/Tail_IsGrabbed",
+        "type": "Bool"
+      }
+    },
+    <!--ここまで-->
+    {
+      "name": "VRCFaceBlendH",
+      "input": {
+        "address": "/avatar/parameters/VRCFaceBlendH",
+        "type": "Float"
+      },
+      "output": {
+        "address": "/avatar/parameters/VRCFaceBlendH",
+        "type": "Float"
+      }
+    },
+    ︙
+```
 参考：https://note.com/33linn/n/n2f60b5155ee3
 
 ### ソースコードのダウンロード
 
-本システムのコードをダウンロードします．
-リポジトリをクローンするか，直接ダウンロードしてください．
-プロジェクトを任意の場所に開きます．
+本システムのコードをダウンロードします．<br>
+リポジトリをクローンするか，直接ダウンロードしてください．<br>
+ダウンロード後，ファイルを任意の場所に開きます．
 
 <img src="image/downloadcode.png" width="600">
 
