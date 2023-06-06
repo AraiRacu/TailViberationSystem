@@ -31,16 +31,12 @@ ArduinoIDEのライブラリマネージャーから"ArduinoOSC"を検索し，�
 PythonでOSC通信ができるように"python-osc"を導入します．<br>
 コマンドプロンプトを開き，以下のコマンドを入力します．<br>
 <br>
-```
-pip install python-osc
-```
-<br><br>
+`pip install python-osc`<br>
+<br>
 インストールが成功後，以下のコマンドを入力し，インストール済みのライブラリを表示します．<br>
 その中に"python-osc"が含まれていれば成功です．<br>
 <br>
-```
-python -m pip freeze
-```
+`python -m pip freeze`<br>
 
 参考：https://pypi.org/project/python-osc/
 
