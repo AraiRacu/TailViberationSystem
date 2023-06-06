@@ -8,12 +8,14 @@
 const char* ssid = "SSID"; //WiFIのSSIDを入力
 const char* pass = "Pass"; // WiFiのパスワードを入力
 
-const IPAddress ip(192, 168, XX, XX);
-const IPAddress gateway(192, 168, XX, XX);
-const IPAddress subnet(255, 255, XX, XX);
+const IPAddress ip(192, 168, XX, XX); //自身のIPアドレス
+const IPAddress gateway(192, 168, XX, XX); //デフォルトゲートウェイ
+const IPAddress subnet(255, 255, XX, XX); //サブネットマスク
 
-const char *pc_addr = "192.168.XX.XX";  //"192.168.XX.XX";
+const char *pc_addr = "192.168.XX.XX";  //送信元のPCのIPアドレス
 const int pc_port = XXXX; //受信先のポート
+
+const int vibeStrength = 10000 //バイブレーションの強さ
 
 int i; float f; String s;
 bool isVibe = false;
@@ -25,7 +27,7 @@ void setup(){
   M5.Lcd.fillScreen(BLACK); //Set the screen background color to black.
   M5.Lcd.setTextColor(GREEN , BLACK); //Sets the foreground color and background color of the displayed text.
   M5.Lcd.setTextSize(2);  //Set the font size.
-  M5.Axp.SetLDOVoltage(3, 10000);
+  M5.Axp.SetLDOVoltage(3, vibeStrength);
 
   //Wifi Setup
   #ifdef ESP_PLATFORM
